@@ -1,7 +1,9 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { PostgresErrorCode } from '../../bd/postgresErrorCodes.enum';
 import { UsersService } from './user.service';
-import crypto from 'crypto';
+import crypto from 'crypto-js';
+import bcrypt from 'bcrypt';
+import { RegisterDto } from '../../authentication/dto/register.dto';
 
 export class AuthenticationService {
   constructor(private readonly usersService: UsersService) {}

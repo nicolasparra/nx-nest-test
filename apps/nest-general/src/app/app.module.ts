@@ -5,6 +5,7 @@ import * as Joi from '@hapi/joi';
 import { environmentsValidations } from '../configs/environments-validation';
 import { DatabaseModule } from '../bd/database.module';
 import environments from '../configs/environments';
+import { AuthenticationModule } from '../authentication/authentication.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import environments from '../configs/environments';
       validationSchema: Joi.object(environmentsValidations),
     }),
     DatabaseModule,
+    AuthenticationModule
   ],
   controllers: [],
   providers: [],

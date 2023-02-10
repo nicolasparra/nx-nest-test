@@ -6,4 +6,6 @@ export enum environmentsEnum {
   POSTGRES_DB = 'name_bd',
   PORT = 'port',
   TYPE_BD = 'postgres',
+  JWT_SECRET='jwtSecret',
+  JWT_EXPIRATION_TIME='jwtExpirationTime'
 }

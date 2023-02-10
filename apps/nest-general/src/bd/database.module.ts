@@ -3,11 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { environmentsEnum } from '../configs/constants/environments.enum';
 import { Post } from '../app/posts/entities/post.entity';
+import { User } from '../app/users/user.entity'
 
 const ENTITY_PATH = __dirname + '../**/*.entity{.ts,.js}';
 const SYNCHRONIZE_BD = true;
-console.log(__dirname);
-console.log(ENTITY_PATH);
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -20,7 +19,7 @@ console.log(ENTITY_PATH);
         username: configService.get(environmentsEnum.POSTGRES_USER),
         password: configService.get(environmentsEnum.POSTGRES_PASSWORD),
         database: configService.get(environmentsEnum.POSTGRES_DB),
-        entities: [ENTITY_PATH, Post],
+        entities: [ENTITY_PATH, Post, User],
         synchronize: SYNCHRONIZE_BD,
       }),
     }),

@@ -35,3 +35,17 @@ npx nx serve nombre-application
 ```
 
 https://github.com/mwanago/nestjs-typescript/blob/part-3/src/authentication/dto/register.dto.ts
+
+
+## Variables de entorno
+
+````
+POSTGRES_HOST=
+POSTGRES_PORT=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+PORT=
+JWT_SECRET=
+JWT_EXPIRATION_TIME=
+````
