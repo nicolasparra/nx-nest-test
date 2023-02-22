@@ -6,6 +6,8 @@ import { environmentsValidations } from '../configs/environments-validation';
 import { DatabaseModule } from '../bd/database.module';
 import environments from '../configs/environments';
 import { AuthenticationModule } from '../authentication/authentication.module';
+import { ResponseWithOKInterceptor } from '../shared/interceptors/responseOk.interceptor';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -15,9 +17,14 @@ import { AuthenticationModule } from '../authentication/authentication.module';
       validationSchema: Joi.object(environmentsValidations),
     }),
     DatabaseModule,
-    AuthenticationModule
+    AuthenticationModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseWithOKInterceptor,
+    },
+  ],
 })
 export class AppModule {}
