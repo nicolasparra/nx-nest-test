@@ -8,6 +8,7 @@ import environments from '../configs/environments';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { ResponseWithOKInterceptor } from '../shared/interceptors/responseOk.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     }),
     DatabaseModule,
     AuthenticationModule,
+    CategoriesModule,
   ],
   controllers: [],
   providers: [
