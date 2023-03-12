@@ -78,4 +78,37 @@ export class AuthenticationService {
       );
     }
   }
+
+  public getCookieWithJwtAccessToken(userId: number) {
+    const payload: TokenPayload = { userId };
+    const token = this.jwtService.sign(payload, {
+      secret: this.configService.get('jwtSecret'),
+      expiresIn: `${this.configService.get('jwtExpirationTime')}s`,
+    });
+    return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
+      'jwtExpirationTime'
+    )}`;
+  }
+
+  public getCookieWithJwtRefreshToken(userId: number) {
+    const payload: TokenPayload = { userId };
+    const token = this.jwtService.sign(payload, {
+      secret: this.configService.get('jwtRefreshTokenSecret'),
+      expiresIn: `${this.configService.get('jwtRefreshTokenExpirationTime')}s`,
+    });
+    const cookie = `Refresh=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
+      'jwtRefreshTokenExpirationTime'
+    )}`;
+    return {
+      cookie,
+      token,
+    };
+  }
+
+  public getCookiesForLogOut() {
+    return [
+      'Authentication=; HttpOnly; Path=/; Max-Age=0',
+      'Refresh=; HttpOnly; Path=/; Max-Age=0',
+    ];
+  }
 }

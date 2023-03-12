@@ -6,5 +6,7 @@ export default () => ({
   name_bd: process.env.POSTGRES_DB,
   port: +process.env.PORT,
   jwtSecret: process.env.JWT_SECRET,
-  jwtExpirationTime: process.env.JWT_EXPIRATION_TIME
+  jwtExpirationTime: process.env.JWT_EXPIRATION_TIME,
+  jwtRefreshTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET,
+  jwtRefreshTokenExpirationTime: process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME,
 });

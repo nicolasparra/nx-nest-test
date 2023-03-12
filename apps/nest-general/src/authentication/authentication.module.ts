@@ -7,7 +7,8 @@ import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './jwt.strategy';
-import {environmentsEnum} from '../configs/constants/environments.enum';
+import { JwtRefreshTokenStrategy } from './jwt-refresh-token.strategy';
+import { environmentsEnum } from '../configs/constants/environments.enum';
 
 @Module({
   imports: [
@@ -20,12 +21,19 @@ import {environmentsEnum} from '../configs/constants/environments.enum';
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get(environmentsEnum.JWT_SECRET),
         signOptions: {
-          expiresIn: `${configService.get(environmentsEnum.JWT_EXPIRATION_TIME)}s`,
+          expiresIn: `${configService.get(
+            environmentsEnum.JWT_EXPIRATION_TIME
+          )}s`,
         },
       }),
     }),
   ],
-  providers: [AuthenticationService, LocalStrategy, JwtStrategy],
-  controllers: [AuthenticationController]
+  providers: [
+    AuthenticationService,
+    LocalStrategy,
+    JwtStrategy,
+    JwtRefreshTokenStrategy,
+  ],
+  controllers: [AuthenticationController],
 })
 export class AuthenticationModule {}
